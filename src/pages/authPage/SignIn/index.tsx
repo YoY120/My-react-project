@@ -12,6 +12,9 @@ const initialValues: SignInUserDTO = {
 	password: 'Andrey',
 };
 
+/**
+ * Регистрация
+ */
 export const SignIn = memo(() => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -19,12 +22,13 @@ export const SignIn = memo(() => {
 	const [formValue, setFormValue] = useState(initialValues);
 	const { password, email } = formValue;
 
-	/// Обработчики
+	// Обработчики
 	const handleChange =
 		(key: keyof SignInUserDTO) => (value: string | number | null) => {
 			setFormValue(prevState => ({ ...prevState, [key]: value }));
 		};
 
+	// При успешной регистрации переход на другую страну
 	const handleSubmit = () => {
 		dispatch(signInAction(formValue)).then(() => {
 			navigate('/');
@@ -33,7 +37,9 @@ export const SignIn = memo(() => {
 
 	return (
 		<div>
-			<Text size='4xl'>Log In</Text>
+			<Text size='4xl' view='primary'>
+				Log In
+			</Text>
 			<TextField label='email' value={email} onChange={handleChange('email')} />
 			<TextField
 				label='password'

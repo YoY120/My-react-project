@@ -1,0 +1,11 @@
+.taskListPage {
+  width: 700px;
+
+	align-self: center;
+	justify-self: center;
+
+	&_header {
+		display: flex;
+		padding-left: 20px;
+	}
+}
