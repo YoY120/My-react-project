@@ -1,4 +1,7 @@
-import { TaskListDTO } from '../../../type/serverInterface/TaskListDTO';
+import {
+	CreateTaskListDTO,
+	TaskListDTO,
+} from '../../../type/serverInterface/TaskListDTO';
 import { AbstractApiModule } from '../abstractApiModule';
 
 // Шаблон
@@ -11,5 +14,13 @@ export class TaskListModule extends AbstractApiModule {
 	// получение данных списка
 	getListOfTaskList(): Promise<TaskListDTO[]> {
 		return this.request.get<unknown, TaskListDTO[]>(`${baseUrl}/list`);
+	}
+
+	// Добавления данных
+	createTask(body: CreateTaskListDTO, userId: number): Promise<number> {
+		return this.request.post<CreateTaskListDTO, number>(
+			`${baseUrl}/${userId}`,
+			body
+		);
 	}
 }

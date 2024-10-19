@@ -2,6 +2,9 @@
 	padding: 0;
 	margin: 0;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+
+	&_Wrapper {
+		width: 700px;
+	}
 }

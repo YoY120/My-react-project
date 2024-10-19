@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks/store';
 import { selectListOfTaskList } from '../../../state/task/selector';
 import { TaskListDTO } from '../../../type/serverInterface/TaskListDTO';
 import { Text } from '@consta/uikit/Text';
+import { Button } from '@consta/uikit/Button';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Основная таблица
@@ -15,6 +17,8 @@ import { Text } from '@consta/uikit/Text';
 const TaskListPage = () => {
 	// Отправка запроса на сервер
 	const dispatch = useAppDispatch();
+
+	const navigate = useNavigate();
 
 	// хранение данных
 	const dataListOfTaskList = useAppSelector(selectListOfTaskList());
@@ -41,8 +45,13 @@ const TaskListPage = () => {
 					weight='black'
 					decoration='underline'
 				>
-					Задачи
+					Table Task
 				</Text>
+				<Button
+					view='ghost'
+					label='+ Новая задача'
+					onClick={() => navigate('/taskAdd')}
+				/>
 			</div>
 		);
 	};

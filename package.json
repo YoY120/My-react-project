@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@consta/uikit": "^5.9.2",
+    "@consta/icons": "^1.1.0",
+    "@consta/uikit": "^5.11.0",
     "@reduxjs/toolkit": "^2.2.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

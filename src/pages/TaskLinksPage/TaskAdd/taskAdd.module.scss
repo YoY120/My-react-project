@@ -1,0 +1,17 @@
+.taskAdd {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+
+	&_Header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&_Menu {
+			display: flex;
+			flex-direction: row;
+			gap: 30px;
+		}
+	}
+}

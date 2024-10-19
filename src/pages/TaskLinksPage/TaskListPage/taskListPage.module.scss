@@ -1,11 +1,15 @@
 .taskListPage {
-  width: 700px;
+	display: flex;
+	flex-direction: column;
+
+	gap: 20px;
 
 	align-self: center;
 	justify-self: center;
 
 	&_header {
 		display: flex;
+		justify-content: space-between;
 		padding-left: 20px;
 	}
 }
