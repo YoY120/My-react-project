@@ -16,6 +16,16 @@ export const getListOfTaskListThunk = createAsyncThunk<TaskListDTO[]>(
 );
 
 /**
+ * Функция для получения подробной информации о задачи
+ */
+export const getTaskListByIdThunk = createAsyncThunk<TaskListDTO, number>(
+	'getTaskListById',
+	async byId => {
+		return await api.taskList.getTaskListById(byId);
+	}
+);
+
+/**
  * Функция для создания новой задачи. Внутри функции происходит вызов метода `createTask` от API
 (`api.taskList.createTask(body, userId)`), который создает новую задачу на основе переданных
 данных и возвращает результат создания.

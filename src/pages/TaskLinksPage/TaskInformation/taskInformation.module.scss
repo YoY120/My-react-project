@@ -1,0 +1,26 @@
+.taskInformation {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 20px;
+
+	&_Header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		padding-bottom: 10px;
+		border-bottom: 1px solid gray;
+
+		&_Menu {
+			width: 100px;
+
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+
+	&_Content {
+		padding-left: 20px;
+	}
+}

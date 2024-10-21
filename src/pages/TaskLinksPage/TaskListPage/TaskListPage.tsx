@@ -10,6 +10,7 @@ import { TaskListDTO } from '../../../type/serverInterface/TaskListDTO';
 import { Text } from '@consta/uikit/Text';
 import { Button } from '@consta/uikit/Button';
 import { useNavigate } from 'react-router-dom';
+import { IconPaste } from '@consta/icons/IconPaste';
 
 /**
  * Основная таблица
@@ -56,6 +57,19 @@ const TaskListPage = () => {
 		);
 	};
 
+	const handleMenuTable = (rowId: NewTaskType) => {
+		return (
+			<div>
+				<Button
+					view='clear'
+					onlyIcon
+					iconRight={IconPaste}
+					onClick={() => navigate(`/taskInformation/${rowId.id}`)}
+				/>
+			</div>
+		);
+	};
+
 	const renderTableTaskList = () => {
 		return (
 			<Table
@@ -63,7 +77,11 @@ const TaskListPage = () => {
 				columns={[
 					{ title: 'Id', accessor: 'id' },
 					{ title: 'Caption', accessor: 'caption' },
-					{ title: 'Manage', accessor: 'manage' },
+					{
+						title: 'Manage',
+						accessor: 'manage',
+						renderCell: rowId => handleMenuTable(rowId),
+					},
 				]}
 			/>
 		);

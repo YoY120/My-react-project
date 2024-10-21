@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TaskState } from './type';
-import { getListOfTaskListThunk } from './thunk';
+import { getListOfTaskListThunk, getTaskListByIdThunk } from './thunk';
 
 const initialState: TaskState = {
 	taskList: [],
@@ -24,6 +24,20 @@ export const taskSlice = createSlice({
 		builder.addCase(getListOfTaskListThunk.fulfilled, (state, action) => {
 			console.log('запрос выполнился успешно getListOfTaskListThunk');
 			state.taskList = action.payload;
+		});
+
+		// getTaskListById
+		builder.addCase(getTaskListByIdThunk.pending, (state, action) => {
+			console.log('Запрос начал выполнятся getTaskListByIdThunk');
+		});
+
+		builder.addCase(getTaskListByIdThunk.rejected, (state, action) => {
+			console.log('запрос отвалился с ошибкой getTaskListByIdThunk');
+		});
+
+		builder.addCase(getTaskListByIdThunk.fulfilled, (state, action) => {
+			console.log('запрос выполнился успешно getTaskListByIdThunk');
+			state.task = action.payload;
 		});
 	},
 });

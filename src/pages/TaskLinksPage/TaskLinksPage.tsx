@@ -4,6 +4,7 @@ import style from './taskLinksPage.module.scss';
 import classNames from 'classnames';
 import TaskListPage from './TaskListPage';
 import TaskAdd from './TaskAdd';
+import TaskInformation from './TaskInformation';
 
 /**
  * Основная страница
@@ -13,6 +14,10 @@ const TaskLinksPage = () => {
 		<div className={classNames(style.taskLinksPage)}>
 			<div className={classNames(style.taskLinksPage_Wrapper)}>
 				<Routes>
+					<Route
+						path='/taskInformation/:TaskById'
+						element={<TaskInformation />}
+					/>
 					<Route path='/taskAdd' element={<TaskAdd />} />
 					<Route path='/' element={<TaskListPage />} />
 				</Routes>
