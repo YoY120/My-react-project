@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './taskListPage.module.scss';
 import { Table } from '@consta/uikit/Table';
 import { NewTaskType } from './type';
@@ -11,6 +11,8 @@ import { Text } from '@consta/uikit/Text';
 import { Button } from '@consta/uikit/Button';
 import { useNavigate } from 'react-router-dom';
 import { IconPaste } from '@consta/icons/IconPaste';
+import { IconTrash } from '@consta/icons/IconTrash';
+import TaskDelete from '../TaskDelete';
 
 /**
  * Основная таблица
@@ -23,6 +25,8 @@ const TaskListPage = () => {
 
 	// хранение данных
 	const dataListOfTaskList = useAppSelector(selectListOfTaskList());
+
+	const [formDelete, setFormDelete] = useState<number | null>(null);
 
 	// Запрос данных с сервера при переходе на страницу
 	useEffect(() => {
@@ -66,6 +70,12 @@ const TaskListPage = () => {
 					iconRight={IconPaste}
 					onClick={() => navigate(`/taskInformation/${rowId.id}`)}
 				/>
+				<Button
+					view='clear'
+					onlyIcon
+					iconRight={IconTrash}
+					onClick={() => setFormDelete(Number(rowId.id))}
+				/>
 			</div>
 		);
 	};
@@ -91,6 +101,12 @@ const TaskListPage = () => {
 		<div className={classNames(styles.taskListPage)}>
 			{renderTableHeader()}
 			{renderTableTaskList()}
+			{formDelete && (
+				<TaskDelete
+					isDeleteTask={formDelete}
+					onClose={() => setFormDelete(null)}
+				/>
+			)}
 		</div>
 	);
 };

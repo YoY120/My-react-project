@@ -38,3 +38,14 @@ export const createTaskThunk = createAsyncThunk<
 >('createTask', async ({ body, userId }) => {
 	return await api.taskList.createTask(body, userId);
 });
+
+/**
+ * Функция для удаления задачи по id
+	@param taskId - выбранный id для удаления задачи
+ */
+export const deleteTaskThunk = createAsyncThunk<void, number>(
+	'deleteTask',
+	async taskId => {
+		return await api.taskList.deleteTask(taskId);
+	}
+);

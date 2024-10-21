@@ -37,4 +37,12 @@ export class TaskListModule extends AbstractApiModule {
 			body
 		);
 	}
+
+	/**
+	 * Удаления задачи
+	 * @param taskId - номер id, который нужно удалить
+	 */
+	deleteTask(taskId: number): Promise<void> {
+		return this.request.delete<void>(`${baseUrl}/${taskId}`);
+	}
 }
