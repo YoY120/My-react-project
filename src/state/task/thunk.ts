@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
 	CreateTaskListDTO,
+	EditTaskListDTO,
 	TaskListDTO,
 } from '../../type/serverInterface/TaskListDTO';
 import { api } from '../../app/api';
@@ -24,6 +25,18 @@ export const getTaskListByIdThunk = createAsyncThunk<TaskListDTO, number>(
 		return await api.taskList.getTaskListById(byId);
 	}
 );
+
+/**
+ * функция для редактирования содержимого задачи
+	@param  body - это объект с данными нужный для редактирования задачи
+	@param taskId - это идентификатор id выбранной задачи
+*/
+export const editTaskThunk = createAsyncThunk<
+	void,
+	{ body: EditTaskListDTO; taskId: number }
+>('editTask', async ({ body, taskId }) => {
+	return await api.taskList.editTask(body, taskId);
+});
 
 /**
  * Функция для создания новой задачи. Внутри функции происходит вызов метода `createTask` от API

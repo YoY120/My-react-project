@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import TaskListPage from './TaskListPage';
 import TaskAdd from './TaskAdd';
 import TaskInformation from './TaskInformation';
+import TaskEdit from './TaskEdit';
 
 /**
  * Основная страница
@@ -18,6 +19,7 @@ const TaskLinksPage = () => {
 						path='/taskInformation/:TaskById'
 						element={<TaskInformation />}
 					/>
+					<Route path='/taskEdit/:TaskById' element={<TaskEdit />} />
 					<Route path='/taskAdd' element={<TaskAdd />} />
 					<Route path='/' element={<TaskListPage />} />
 				</Routes>

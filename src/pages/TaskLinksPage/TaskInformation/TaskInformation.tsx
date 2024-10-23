@@ -38,7 +38,7 @@ const TaskInformation = () => {
 						onlyIcon
 						view='ghost'
 						iconRight={IconEdit}
-						onClick={() => null}
+						onClick={() => navigate(`/taskEdit/${TaskById}`)}
 					/>
 					<Button
 						onlyIcon

@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconPaste } from '@consta/icons/IconPaste';
 import { IconTrash } from '@consta/icons/IconTrash';
 import TaskDelete from '../TaskDelete';
+import { IconEdit } from '@consta/icons/IconEdit';
 
 /**
  * Основная таблица
@@ -69,6 +70,12 @@ const TaskListPage = () => {
 					onlyIcon
 					iconRight={IconPaste}
 					onClick={() => navigate(`/taskInformation/${rowId.id}`)}
+				/>
+				<Button
+					onlyIcon
+					view='clear'
+					iconRight={IconEdit}
+					onClick={() => navigate(`/taskEdit/${rowId.id}`)}
 				/>
 				<Button
 					view='clear'

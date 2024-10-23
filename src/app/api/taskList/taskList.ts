@@ -1,5 +1,6 @@
 import {
 	CreateTaskListDTO,
+	EditTaskListDTO,
 	TaskListDTO,
 } from '../../../type/serverInterface/TaskListDTO';
 import { AbstractApiModule } from '../abstractApiModule';
@@ -24,6 +25,18 @@ export class TaskListModule extends AbstractApiModule {
 	 */
 	getTaskListById(byId: number): Promise<TaskListDTO> {
 		return this.request.get<unknown, TaskListDTO>(`${baseUrl}/${byId}`);
+	}
+
+	/**
+	 * Редактирование данных
+	 * @param body - тип данных
+	 * @param taskId - нужный id задачи
+	 */
+	editTask(body: EditTaskListDTO, taskId: number): Promise<void> {
+		return this.request.patch<CreateTaskListDTO, void>(
+			`${baseUrl}/${taskId}`,
+			body
+		);
 	}
 
 	/**
