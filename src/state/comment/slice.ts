@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListOfCommentByIdTaskListThunk } from './thunk';
+import {
+	getCommentByIdThunk,
+	getListOfCommentByIdTaskListThunk,
+} from './thunk';
 import { CommentState } from './type';
 
 const initialState: CommentState = {
@@ -18,6 +21,7 @@ export const commentSlice = createSlice({
 				console.log(
 					'Запрос начал выполнятся getListOfCommentByIdTaskListThunk'
 				);
+				state.comment = null;
 			}
 		);
 
@@ -39,6 +43,20 @@ export const commentSlice = createSlice({
 				state.commentList = action.payload;
 			}
 		);
+
+		builder.addCase(getCommentByIdThunk.pending, (state, action) => {
+			console.log('Запрос начал выполнятся getCommentById');
+			state.comment = null;
+		});
+
+		builder.addCase(getCommentByIdThunk.rejected, (state, action) => {
+			console.log('запрос отвалился с ошибкой getCommentById');
+		});
+
+		builder.addCase(getCommentByIdThunk.fulfilled, (state, action) => {
+			console.log('запрос выполнился успешно getCommentById');
+			state.comment = action.payload;
+		});
 	},
 });
 

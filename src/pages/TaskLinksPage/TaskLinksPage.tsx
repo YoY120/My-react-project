@@ -16,7 +16,7 @@ const TaskLinksPage = () => {
 			<div className={classNames(style.taskLinksPage_Wrapper)}>
 				<Routes>
 					<Route
-						path='/taskInformation/:TaskById'
+						path='/taskInformation/:TaskById/*'
 						element={<TaskInformation />}
 					/>
 					<Route path='/taskEdit/:TaskById' element={<TaskEdit />} />

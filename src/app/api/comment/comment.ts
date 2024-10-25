@@ -12,4 +12,13 @@ export class CommentModule extends AbstractApiModule {
 	getListOfCommentByIdTaskList(taskId: number): Promise<CommentDTO[]> {
 		return this.request.get<unknown, CommentDTO[]>(`${baseUrl}/list/${taskId}`);
 	}
+
+	/**
+	 * Получение подробной информации комментарии
+	 * @param commentId - идентификатор нужного комментария
+	 * @returns Возвращает типы данных подробной информации от комментариев
+	 */
+	getCommentById(commentId: number): Promise<CommentDTO> {
+		return this.request.get<unknown, CommentDTO>(`${baseUrl}/${commentId}`);
+	}
 }
