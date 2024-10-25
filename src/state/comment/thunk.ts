@@ -1,5 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CommentDTO } from '../../type/serverInterface/CommentDTO';
+import {
+	CommentDTO,
+	CreateCommentDTO,
+} from '../../type/serverInterface/CommentDTO';
 import { api } from '../../app/api';
 
 /**
@@ -21,3 +24,13 @@ export const getCommentByIdThunk = createAsyncThunk<CommentDTO, number>(
 		return await api.comment.getCommentById(commentId);
 	}
 );
+
+/**
+ * Функция для создания нового комментария
+ */
+export const createCommentThunk = createAsyncThunk<
+	number,
+	{ body: CreateCommentDTO; userId: number; taskListId: number }
+>('createComment', async ({ body, userId, taskListId }) => {
+	return await api.comment.createComment(body, userId, taskListId);
+});

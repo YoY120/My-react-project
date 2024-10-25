@@ -12,7 +12,10 @@ import { Button } from '@consta/uikit/Button';
  * Экран информации комментария
  */
 const CommentInformation = () => {
-	const { commentId } = useParams<{ commentId: string }>();
+	const { commentId, TaskById } = useParams<{
+		commentId: string;
+		TaskById: string;
+	}>();
 
 	const commentInfo = useAppSelector(selectComment());
 
@@ -35,7 +38,7 @@ const CommentInformation = () => {
 						onlyIcon
 						view='ghost'
 						iconRight={IconClose}
-						onClick={() => navigate('/taskInformation/:TaskById/')}
+						onClick={() => navigate(`/taskInformation/${TaskById}`)}
 					/>
 				</div>
 			</div>

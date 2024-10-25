@@ -1,4 +1,7 @@
-import { CommentDTO } from '../../../type/serverInterface/CommentDTO';
+import {
+	CommentDTO,
+	CreateCommentDTO,
+} from '../../../type/serverInterface/CommentDTO';
 import { AbstractApiModule } from '../abstractApiModule';
 
 const baseUrl = 'http://localhost:3000/comment';
@@ -20,5 +23,23 @@ export class CommentModule extends AbstractApiModule {
 	 */
 	getCommentById(commentId: number): Promise<CommentDTO> {
 		return this.request.get<unknown, CommentDTO>(`${baseUrl}/${commentId}`);
+	}
+
+	/**
+	 * Запрос на сервер для создания нового комментария пользователем
+	 * @param body - данные комментария
+	 * @param userId - id пользователя
+	 * @param taskListId - идентификатор id задачи
+	 * @returns возвращает новый массив данных с новым комментарием
+	 */
+	createComment(
+		body: CreateCommentDTO,
+		userId: number,
+		taskId: number
+	): Promise<number> {
+		return this.request.post<CreateCommentDTO, number>(
+			`${baseUrl}/${userId}/${taskId}`,
+			body
+		);
 	}
 }

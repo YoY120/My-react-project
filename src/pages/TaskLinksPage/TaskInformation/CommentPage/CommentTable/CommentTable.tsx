@@ -62,8 +62,8 @@ const CommentTable = () => {
 				</Text>
 				<Button
 					view='ghost'
-					label='+ Новая задача'
-					onClick={() => navigate('/taskAdd')}
+					label='+ Новый комментарии'
+					onClick={() => navigate(`commentAdd`)}
 				/>
 			</div>
 		);
