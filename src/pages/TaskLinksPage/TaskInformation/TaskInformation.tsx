@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks/store';
 import { IconClose } from '@consta/icons/IconClose';
 import { IconEdit } from '@consta/icons/IconEdit';
 import { selectTask } from '../../../state/task/selector';
+import CommentPageRoute from './CommentPage';
 
 /**
  * Окно с информацией о задачи
@@ -65,6 +66,7 @@ const TaskInformation = () => {
 		<div className={style.taskInformation}>
 			{renderHeader()}
 			{renderContent()}
+			<CommentPageRoute/>
 		</div>
 	);
 };
