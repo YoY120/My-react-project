@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './commentTable.module.scss';
@@ -10,6 +10,9 @@ import { selectorListOfCommentList } from '../../../../../state/comment/selector
 import { NewCommentType } from './type';
 import { Table } from '@consta/uikit/Table';
 import { IconPaste } from '@consta/icons/IconPaste';
+import { IconEdit } from '@consta/icons/IconEdit';
+import CommentDelete from '../CommentDelete';
+import { IconTrash } from '@consta/icons/IconTrash';
 
 /**
  * Таблица для комментариев
@@ -24,6 +27,8 @@ const CommentTable = () => {
 	const navigate = useNavigate();
 
 	const dataListOfCommentList = useAppSelector(selectorListOfCommentList());
+
+	const [formDelete, setFormDelete] = useState<number | null>(null);
 
 	useEffect(() => {
 		dispatch(getListOfCommentByIdTaskListThunk({ taskId: formattedTaskById }));
@@ -43,6 +48,18 @@ const CommentTable = () => {
 					onlyIcon
 					iconRight={IconPaste}
 					onClick={() => navigate(`commentInformation/${rowId.id}`)}
+				/>
+				<Button
+					onlyIcon
+					view='clear'
+					iconRight={IconEdit}
+					onClick={() => navigate(`/commentEdit/${rowId.id}`)}
+				/>
+				<Button
+					view='clear'
+					onlyIcon
+					iconRight={IconTrash}
+					onClick={() => setFormDelete(Number(rowId.id))}
 				/>
 			</div>
 		);
@@ -91,6 +108,13 @@ const CommentTable = () => {
 		<div className={styles.commentTable}>
 			{renderTableHeader()}
 			{renderTableTaskList()}
+			{formDelete && (
+				<CommentDelete
+					isTaskId={formattedTaskById}
+					isDeleteComment={formDelete}
+					onClose={() => setFormDelete(null)}
+				/>
+			)}
 		</div>
 	);
 };

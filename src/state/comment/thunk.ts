@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
 	CommentDTO,
 	CreateCommentDTO,
+	EditTCommentDTO,
 } from '../../type/serverInterface/CommentDTO';
 import { api } from '../../app/api';
 
@@ -34,3 +35,23 @@ export const createCommentThunk = createAsyncThunk<
 >('createComment', async ({ body, userId, taskListId }) => {
 	return await api.comment.createComment(body, userId, taskListId);
 });
+
+/**
+ * Функция для сохранения новых данных
+ */
+export const editCommentThunk = createAsyncThunk<
+	void,
+	{ body: EditTCommentDTO; commentId: number }
+>('editComment', async ({ body, commentId }) => {
+	return await api.comment.editComment(body, commentId);
+});
+
+/**
+ * Функция для удаления комментария
+ */
+export const deleteCommentThunk = createAsyncThunk<void, number>(
+	'deleteComment',
+	async commentId => {
+		return await api.comment.deleteComment(commentId);
+	}
+);

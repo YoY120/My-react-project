@@ -12,6 +12,9 @@ import { Text } from '@consta/uikit/Text';
 import { Button } from '@consta/uikit/Button';
 import { TextField } from '@consta/uikit/TextField';
 
+/**
+ * Страница добавления комментария
+ */
 const CommentAdd = () => {
 	const { TaskById } = useParams<{ TaskById: string }>();
 
@@ -28,8 +31,7 @@ const CommentAdd = () => {
 			setForm(valueForm => ({ ...valueForm, [key]: value }));
 		};
 
-	console.log(TaskById);
-
+		
 	const handleAddTask = () => {
 		user &&
 			dispatch(

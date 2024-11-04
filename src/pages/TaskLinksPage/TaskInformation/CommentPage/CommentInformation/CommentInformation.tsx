@@ -7,6 +7,7 @@ import { Text } from '@consta/uikit/Text';
 import style from './commentInformation.module.scss';
 import { IconClose } from '@consta/icons/IconClose';
 import { Button } from '@consta/uikit/Button';
+import { IconEdit } from '@consta/icons/IconEdit';
 
 /**
  * Экран информации комментария
@@ -27,6 +28,10 @@ const CommentInformation = () => {
 		commentId && dispatch(getCommentByIdThunk(Number(commentId)));
 	}, [dispatch, commentId]);
 
+	const handleEditClick = () => {
+		navigate(`/taskInformation/${TaskById}/commentEdit/${commentId}`);
+	};
+
 	const renderHeader = () => {
 		return (
 			<div className={style.commentInformation_Header}>
@@ -34,6 +39,12 @@ const CommentInformation = () => {
 					Подробная информация о комментарии c id №{commentInfo?.id}:
 				</Text>
 				<div className={style.commentInformation_Header_Menu}>
+					<Button
+						onlyIcon
+						view='ghost'
+						iconRight={IconEdit}
+						onClick={handleEditClick}
+					/>
 					<Button
 						onlyIcon
 						view='ghost'

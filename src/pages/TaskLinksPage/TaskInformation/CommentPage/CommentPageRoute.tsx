@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import CommentTable from './CommentTable';
 import CommentInformation from './CommentInformation';
 import CommentAdd from './CommentAdd';
+import CommentEdit from './CommentEdit';
 
 const CommentPageRoute = () => {
 	return (
@@ -12,6 +13,7 @@ const CommentPageRoute = () => {
 				path='commentInformation/:commentId'
 				element={<CommentInformation />}
 			/>
+			<Route path='commentEdit/:commentId' element={<CommentEdit />} />
 			<Route path='/' element={<CommentTable />} />
 		</Routes>
 	);

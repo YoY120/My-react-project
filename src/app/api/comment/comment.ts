@@ -1,6 +1,7 @@
 import {
 	CommentDTO,
 	CreateCommentDTO,
+	EditTCommentDTO,
 } from '../../../type/serverInterface/CommentDTO';
 import { AbstractApiModule } from '../abstractApiModule';
 
@@ -41,5 +42,27 @@ export class CommentModule extends AbstractApiModule {
 			`${baseUrl}/${userId}/${taskId}`,
 			body
 		);
+	}
+
+	/**
+	 * Редактирование комментария
+	 * @param body - типы данных
+	 * @param commentId - идентификатор id редактируемого комментария
+	 * @returns возвращает тип данных, которые нужно отредактировать
+	 */
+	editComment(body: EditTCommentDTO, commentId: number): Promise<void> {
+		return this.request.patch<EditTCommentDTO, void>(
+			`${baseUrl}/${commentId}`,
+			body
+		);
+	}
+
+	/**
+	 * Удаление комментария
+	 * @param commentId - идентификатор комментария, которого нужно удалить
+	 * @returns Возвращает id комментария, который был удален
+	 */
+	deleteComment(commentId: number): Promise<void> {
+		return this.request.delete(`${baseUrl}/${commentId}`);
 	}
 }
