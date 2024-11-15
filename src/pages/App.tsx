@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import style from './App.module.scss'
-import {
-	presetGpnDark,
-	presetGpnDefault,
-	Theme,
-	ThemePreset,
-} from '@consta/uikit/Theme';
+import style from './App.module.scss';
 import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 import { IconSun } from '@consta/icons/IconSun';
 import { IconMoon } from '@consta/icons/IconMoon';
@@ -14,8 +8,14 @@ import { IconLightningBolt } from '@consta/icons/IconLightningBolt';
 import { Layout } from '@consta/uikit/Layout';
 import PrivateRouteGuard from '../components/AuthRoute/PrivateRouteGuard';
 import AuthPage from './authPage';
-import TaskLinksPage from './TaskLinksPage';
+import TaskRoutePage from './TaskRoutePage';
 import classNames from 'classnames';
+import {
+	presetGpnDark,
+	presetGpnDefault,
+	Theme,
+	ThemePreset,
+} from '@consta/uikit/Theme';
 
 export enum ThemeValues {
 	gpnDefault = 'gpnDefault',
@@ -67,7 +67,7 @@ function App() {
 					<Route path='/auth/*' element={<AuthPage />} />
 				</Route>
 				<Route element={<PrivateRouteGuard needAuth={true} />}>
-					<Route path='/*' element={<TaskLinksPage />} />
+					<Route path='/*' element={<TaskRoutePage />} />
 				</Route>
 			</Routes>
 		</Theme>
