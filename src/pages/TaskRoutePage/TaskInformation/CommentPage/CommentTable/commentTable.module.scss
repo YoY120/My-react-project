@@ -1,0 +1,17 @@
+.commentTable {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+
+	gap: 20px;
+	width: 100%;
+	padding-top: 20px;
+
+	border-top: 1px solid gray;
+
+	&_header {
+		display: flex;
+		justify-content: space-between;
+		padding-left: 20px;
+	}
+}

@@ -6,6 +6,7 @@ import { TextField } from '@consta/uikit/TextField';
 import { Button } from '@consta/uikit/Button';
 import { useAppDispatch } from '../../../app/hooks/store';
 import { signInAction } from '../../../state/auth/actiom';
+import style from './SignIn.module.scss';
 
 const initialValues: SignInUserDTO = {
 	email: 'Andrey@.ru',
@@ -22,13 +23,11 @@ export const SignIn = memo(() => {
 	const [formValue, setFormValue] = useState(initialValues);
 	const { password, email } = formValue;
 
-	// Обработчики
 	const handleChange =
 		(key: keyof SignInUserDTO) => (value: string | number | null) => {
 			setFormValue(prevState => ({ ...prevState, [key]: value }));
 		};
 
-	// При успешной регистрации переход на другую страну
 	const handleSubmit = () => {
 		dispatch(signInAction(formValue)).then(() => {
 			navigate('/');
@@ -36,19 +35,25 @@ export const SignIn = memo(() => {
 	};
 
 	return (
-		<div>
-			<Text size='4xl' view='primary'>
-				Log In
-			</Text>
-			<TextField label='email' value={email} onChange={handleChange('email')} />
-			<TextField
-				label='password'
-				type='password'
-				value={password}
-				onChange={handleChange('password')}
-			/>
-			<Button label='Enter' onClick={handleSubmit} />
-			<Link to='/auth/SignUp'>Sign Up</Link>
+		<div className={style.SignIn}>
+			<div className={style.SignIn_Wrapper}>
+				<Text className={style.SignIn_Header} size='4xl' view='primary'>
+					Log In
+				</Text>
+				<TextField
+					label='email'
+					value={email}
+					onChange={handleChange('email')}
+				/>
+				<TextField
+					label='password'
+					type='password'
+					value={password}
+					onChange={handleChange('password')}
+				/>
+				<Button label='Enter' onClick={handleSubmit} />
+				<Link to='/auth/SignUp'>Sign Up</Link>
+			</div>
 		</div>
 	);
 });
