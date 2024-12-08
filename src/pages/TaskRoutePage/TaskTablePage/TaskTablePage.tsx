@@ -14,6 +14,10 @@ import { IconPaste } from '@consta/icons/IconPaste';
 import { IconTrash } from '@consta/icons/IconTrash';
 import TaskDelete from '../TaskDelete';
 import { IconEdit } from '@consta/icons/IconEdit';
+import { TextField } from '@consta/uikit/TextField';
+import { FieldGroup } from '@consta/uikit/FieldGroup';
+import helperSortTable from '../../../helpers';
+import useSearchData from '../../../hooks';
 
 /**
  * Основная таблица
@@ -26,33 +30,55 @@ const TaskTablePage = () => {
 
 	const [formDelete, setFormDelete] = useState<number | null>(null);
 
+	const [isSorting, setIsSorting] = useState<boolean>(false);
+
+	const [search, setSearch] = useState<string | null>(null);
+
 	useEffect(() => {
 		dispatch(getListOfTaskListThunk());
 	}, []);
 
-	const formattedTaskList = dataListOfTaskList.map(
-		(task: TaskListDTO): NewTaskType => {
-			return { ...task, id: String(task.id) };
-		}
-	);
+	const copyTaskArray = [...dataListOfTaskList];
+
+	const sortTask = helperSortTable(copyTaskArray, isSorting);
+
+	const formattedTaskList = sortTask.map((task: TaskListDTO): NewTaskType => {
+		return { ...task, id: String(task.id) };
+	});
+
+	const searchTask = useSearchData(formattedTaskList, search, 'caption');
 
 	const renderTableHeader = () => {
 		return (
 			<div className={classNames(styles.taskTablePage_header)}>
-				<Text
-					size='3xl'
-					view='primary'
-					font='mono'
-					weight='black'
-					decoration='underline'
-				>
-					Table Task
-				</Text>
-				<Button
-					view='ghost'
-					label='+ Новая задача'
-					onClick={() => navigate('/taskAdd')}
-				/>
+				<div className={styles.taskTablePage_header_Menu}>
+					<Text
+						size='3xl'
+						view='primary'
+						font='mono'
+						weight='black'
+						decoration='underline'
+					>
+						Table Task
+					</Text>
+					<Button
+						view='ghost'
+						label='+ Новая задача'
+						onClick={() => navigate('/taskAdd')}
+					/>
+				</div>
+				<FieldGroup form='round' size='m'>
+					<TextField
+						placeholder='Поиск по полю Caption'
+						value={search}
+						onChange={setSearch}
+					/>
+					<Button
+						view='ghost'
+						label='Сортировка'
+						onClick={() => setIsSorting(!isSorting)}
+					/>
+				</FieldGroup>
 			</div>
 		);
 	};
@@ -86,9 +112,13 @@ const TaskTablePage = () => {
 		return (
 			<Table
 				stickyHeader
-				rows={formattedTaskList}
+				rows={searchTask}
 				columns={[
-					{ title: 'Id', accessor: 'id', align: 'center' },
+					{
+						title: 'Id',
+						accessor: 'id',
+						align: 'center',
+					},
 					{ title: 'Caption', accessor: 'caption', align: 'center' },
 					{
 						title: 'Manage',
