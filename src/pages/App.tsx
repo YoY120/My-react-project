@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import style from './App.module.scss';
 import { ThemeToggler } from '@consta/uikit/ThemeToggler';
@@ -16,6 +16,10 @@ import {
 	Theme,
 	ThemePreset,
 } from '@consta/uikit/Theme';
+import { Button } from '@consta/uikit/Button';
+import { useAppDispatch } from '../app/hooks/store';
+import { getUserDataAction } from '../state/auth/actiom';
+import { logout } from '../state/auth';
 
 export enum ThemeValues {
 	gpnDefault = 'gpnDefault',
@@ -41,11 +45,27 @@ const getItemIcon = (item: ThemeValues) => {
 	}
 };
 
+/**
+ * Корневой компонент
+ */
 function App() {
+	const dispatch = useAppDispatch();
+
 	const [theme, setTheme] = useState<ThemeValues>(ThemeValues.gpnDark);
 
 	const handleThemeChange = (value: ThemeValues) => {
 		setTheme(value);
+	};
+
+	//Получение данных аккаунта пользователя
+	useEffect(() => {
+		dispatch(getUserDataAction());
+	}, []);
+
+	// обработчик нажатия кнопки выхода из аккаунта
+	const handleLogOut = () => {
+		dispatch(logout());
+		dispatch(getUserDataAction());
 	};
 
 	return (
@@ -60,6 +80,11 @@ function App() {
 					getItemIcon={getItemIcon}
 					onChange={handleThemeChange}
 					direction='downStartLeft'
+				/>
+				<Button
+					label='Выйти из аккаунта'
+					view='primary'
+					onClick={() => handleLogOut()}
 				/>
 			</Layout>
 			<Routes>

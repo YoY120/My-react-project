@@ -17,6 +17,8 @@ export class AxiosCoreApi {
 
 		this._axiosInstance.interceptors.request.use(config => {
 			if (this._accessToken)
+				console.log('this._accessToken, ', this._accessToken)
+
 				config.headers.Authorization = `Bearer ${this._accessToken}`;
 			return config;
 		});

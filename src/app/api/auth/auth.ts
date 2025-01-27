@@ -26,7 +26,7 @@ export class AuthModule extends AbstractApiModule {
 				data
 			)
 			.then(response => {
-				this.request.accessToken = response.accessToken; 
+				this.request.accessToken = response.accessToken;
 			});
 	}
 
