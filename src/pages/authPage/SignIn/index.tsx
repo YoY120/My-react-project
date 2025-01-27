@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, replace, useNavigate } from 'react-router-dom';
 import { SignInUserDTO } from '../../../type/serverInterface/user/userDTO';
 import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextField';
@@ -9,8 +9,8 @@ import { signInAction } from '../../../state/auth/actiom';
 import style from './SignIn.module.scss';
 
 const initialValues: SignInUserDTO = {
-	email: 'Andrey@.ru',
-	password: 'Andrey',
+	email: '',
+	password: '',
 };
 
 /**
@@ -29,7 +29,7 @@ export const SignIn = memo(() => {
 		};
 
 	const handleSubmit = () => {
-		dispatch(signInAction(formValue)).then(() => {
+		dispatch(signInAction(formValue)).then(res => {
 			navigate('/');
 		});
 	};

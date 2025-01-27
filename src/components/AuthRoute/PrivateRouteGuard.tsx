@@ -14,9 +14,10 @@ const getRedirectPath = (authStatus: boolean) =>
 const PrivateRouteGuard: FC<PrivateRouteGuardProps> = memo(
 	function PrivateRouteGuard({ needAuth }) {
 		const authStatus = useSelector<RootState>(state => state.auth.isAuth);
+		console.log(`PrivateRouteGuardProps ${needAuth}`);
 
 		if (needAuth !== authStatus)
-			return <Navigate to={getRedirectPath(needAuth)} />;
+			return <Navigate to={getRedirectPath(needAuth)} replace />;
 		return <Outlet />;
 	}
 );
